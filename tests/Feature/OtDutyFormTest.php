@@ -59,6 +59,8 @@ class OtDutyFormTest extends TestCase
         $response->assertSee('data-duty-field="ot_no"', false);
         $response->assertSee('data-duty-field="department"', false);
         $response->assertSee('data-duty-field="unit_no"', false);
+        $response->assertSee('data-duty-field="technician_name"', false);
+        $response->assertSee('data-duty-field="surgery"', false);
         $response->assertSee('searchable-select', false);
 
         foreach (OtDutyOptions::sections() as $section) {
@@ -72,14 +74,19 @@ class OtDutyFormTest extends TestCase
         $admin = User::factory()->create(['role' => 'admin']);
 
         $this->actingAs($admin)
-            ->post('/ot-duty', $this->assignment('Recovery section'))
+            ->post('/ot-duty', array_merge($this->assignment('Recovery section'), [
+                'technician_name' => '',
+                'surgery' => '',
+            ]))
             ->assertRedirect(route('ot-duty.index'));
 
         $this->assertDatabaseHas('ot_duties', [
             'section' => 'Recovery section',
+            'technician_name' => null,
             'ot_no' => null,
             'department' => null,
             'unit_no' => null,
+            'surgery' => null,
         ]);
     }
 

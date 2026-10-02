@@ -36,14 +36,6 @@
                     <a href="{{ route('ot-duty.create') }}" class="sidebar-link {{ request()->routeIs('ot-duty.create') ? 'active' : '' }}">
                         <i class="bi bi-plus-circle"></i><span>New Assignment</span>
                     </a>
-                    <a href="{{ route('staff-directory.index') }}" class="sidebar-link {{ request()->routeIs('staff-directory.*') ? 'active' : '' }}">
-                        <i class="bi bi-people"></i><span>Sister &amp; Technician</span>
-                    </a>
-                @endcan
-                @can('manage-subscription-settings')
-                    <a href="{{ route('superadmin.subscription-settings') }}" class="sidebar-link {{ request()->routeIs('superadmin.*') ? 'active' : '' }}">
-                        <i class="bi bi-sliders"></i><span>Subscription settings</span>
-                    </a>
                 @endcan
             </nav>
 
@@ -79,24 +71,9 @@
                 <div class="topbar-date"><i class="bi bi-calendar3 me-2"></i>{{ now()->format('l, d M Y') }}</div>
             </header>
 
-            @if ($subscriptionTrialActive)
-                <div class="trial-notice">
-                    <span>
-                        <i class="bi bi-hourglass-split me-2"></i>
-                        Free trial ends in <strong class="trial-countdown" data-trial-countdown data-trial-ends-at="{{ $subscriptionTrialEndsAt->toIso8601String() }}" aria-live="off">--d --h --m --s</strong>
-                        <span class="trial-end-date">(ending {{ $subscriptionTrialEndsAt->format('d M Y') }})</span>
-                    </span>
-                    <a href="{{ route('subscription.payment') }}">Payment details</a>
-                </div>
-            @endif
-
             <main class="app-content">
                 @yield('content')
             </main>
-
-            <footer class="app-footer">
-                <span>Developed and maintained by <a href="https://nbunify.com" target="_blank" rel="noopener noreferrer">Nbunify Pvt. Ltd.</a></span>
-            </footer>
         </div>
     </div>
 

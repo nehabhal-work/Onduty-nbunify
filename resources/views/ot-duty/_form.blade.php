@@ -36,7 +36,7 @@
         @enderror
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3" data-duty-field="technician_name">
         <div class="d-flex justify-content-between align-items-center">
             <label class="form-label">Technician Name <span class="text-danger">*</span></label>
             @can('manage-staff-directory')<a class="small text-decoration-none mb-2" href="{{ route('staff-directory.create', ['type' => 'technician']) }}">Manage</a>@endcan
@@ -127,7 +127,7 @@
         @enderror
     </div>
 
-    <div class="col-md-12">
+    <div class="col-md-12" data-duty-field="surgery">
         <label class="form-label">Surgery</label>
         <input type="text" name="surgery" value="{{ old('surgery', $otDuty->surgery ?? '') }}"
             class="form-control @error('surgery') is-invalid @enderror" placeholder="Enter surgery name">

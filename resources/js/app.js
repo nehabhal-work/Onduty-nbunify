@@ -71,11 +71,11 @@ document.querySelectorAll('#duty-section').forEach((sectionSelect) => {
 	const otSelect = form.querySelector('[name="ot_no"]');
 	const departmentSelect = form.querySelector('[name="department"]');
 	const sectionRules = {
-		'2nd floor section': { ot_no: true, department: true, unit_no: true },
-		'4th floor section': { ot_no: true, department: true, unit_no: false },
-		'LR section': { ot_no: false, department: true, unit_no: true },
-		'Recovery section': { ot_no: false, department: false, unit_no: false },
-		'Scope OT section': { ot_no: false, department: true, unit_no: true },
+		'2nd floor section': { technician_name: true, ot_no: true, department: true, unit_no: true, surgery: true },
+		'4th floor section': { technician_name: true, ot_no: true, department: true, unit_no: false, surgery: true },
+		'LR section': { technician_name: true, ot_no: false, department: true, unit_no: true, surgery: true },
+		'Recovery section': { technician_name: false, ot_no: false, department: false, unit_no: false, surgery: false },
+		'Scope OT section': { technician_name: true, ot_no: false, department: true, unit_no: true, surgery: true },
 	};
 	const restrictedOtNumbers = new Set(['17', '18', '19', '20', '21']);
 
@@ -100,7 +100,7 @@ document.querySelectorAll('#duty-section').forEach((sectionSelect) => {
 
 		Object.entries(rules).forEach(([field, visible]) => {
 			const container = form.querySelector(`[data-duty-field="${field}"]`);
-			const control = container.querySelector('select');
+			const control = container.querySelector('select, input, textarea');
 			container.hidden = !visible;
 			control.required = visible;
 			if (!visible) control.value = '';
@@ -122,6 +122,7 @@ document.querySelectorAll('#duty-section').forEach((sectionSelect) => {
 		});
 		if (section === 'LR section') departmentSelect.value = 'OBGY';
 
+		refreshChoices(form.querySelector('[name="technician_name"]'));
 		refreshChoices(otSelect);
 		refreshChoices(departmentSelect);
 	};

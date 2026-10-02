@@ -194,7 +194,7 @@
                                         <strong>{{ $otDuty->sister_name }}</strong>
                                     </td>
 
-                                    <td>{{ $otDuty->technician_name }}</td>
+                                    <td>{{ $otDuty->technician_name ?: '-' }}</td>
 
                                     <td>{{ $otDuty->date_time?->format('d M Y, h:i A') ?? '-' }}</td>
 

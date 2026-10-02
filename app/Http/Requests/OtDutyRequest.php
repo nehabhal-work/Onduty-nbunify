@@ -17,6 +17,7 @@ class OtDutyRequest extends FormRequest
     public function rules(): array
     {
         $section = $this->input('section');
+        $requiresTechnician = $section !== 'Recovery section';
         $requiresOtNumber = in_array($section, ['2nd floor section', '4th floor section'], true);
         $requiresDepartment = $section !== 'Recovery section';
         $requiresUnit = in_array($section, ['2nd floor section', 'LR section', 'Scope OT section'], true);
@@ -39,7 +40,8 @@ class OtDutyRequest extends FormRequest
                 Rule::exists('staff_members', 'name')->where('type', 'sister'),
             ],
             'technician_name' => [
-                'required',
+                Rule::requiredIf($requiresTechnician),
+                'nullable',
                 'string',
                 'max:100',
                 Rule::exists('staff_members', 'name')->where('type', 'technician'),
@@ -93,6 +95,8 @@ class OtDutyRequest extends FormRequest
             $values['department'] = 'OBGY';
         } elseif ($section === 'Recovery section') {
             $values['department'] = null;
+            $values['technician_name'] = null;
+            $values['surgery'] = null;
         }
 
         if (in_array($section, ['LR section', 'Recovery section', 'Scope OT section'], true)) {

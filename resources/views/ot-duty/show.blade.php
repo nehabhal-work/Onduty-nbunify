@@ -36,7 +36,7 @@
                         <table class="table table-borderless align-middle mb-0">
                             <tbody>
                                 <tr><th class="ps-4 text-muted fw-medium" scope="row">Sister</th><td class="pe-4 fw-semibold">{{ $otDuty->sister_name }}</td></tr>
-                                <tr><th class="ps-4 text-muted fw-medium" scope="row">Technician</th><td class="pe-4 fw-semibold">{{ $otDuty->technician_name }}</td></tr>
+                                <tr><th class="ps-4 text-muted fw-medium" scope="row">Technician</th><td class="pe-4 fw-semibold">{{ $otDuty->technician_name ?: '-' }}</td></tr>
                                 <tr><th class="ps-4 text-muted fw-medium" scope="row">Date &amp; time</th><td class="pe-4">{{ $otDuty->date_time?->format('d M Y, h:i A') ?? '-' }}</td></tr>
                                 <tr><th class="ps-4 text-muted fw-medium" scope="row">Shift</th><td class="pe-4">{{ $otDuty->shift }}</td></tr>
                                 <tr><th class="ps-4 text-muted fw-medium" scope="row">OT number</th><td class="pe-4">{{ $otDuty->ot_no ? 'OT '.$otDuty->ot_no : '-' }}</td></tr>
