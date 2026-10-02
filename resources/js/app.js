@@ -1,3 +1,6 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap';
 import Choices from 'choices.js';
 import 'choices.js/public/assets/styles/choices.min.css';
 import QRCode from 'qrcode';
