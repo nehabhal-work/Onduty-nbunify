@@ -195,28 +195,19 @@ body.app-body {
 }
 
 .sidebar-toggle {
-    width: 2.375rem;
     height: 2.375rem;
-    padding: 0;
+    padding: .375rem .75rem;
 }
 
-.dashboard-metric-icon,
-.subscription-status-icon {
+.dashboard-metric-icon {
     display: grid;
     flex: 0 0 2.875rem;
     width: 2.875rem;
     height: 2.875rem;
     place-items: center;
-}
-
-.subscription-status-icon {
-    flex-basis: 2.625rem;
-    width: 2.625rem;
-    height: 2.625rem;
-    color: var(--bs-success);
-    background-color: var(--bs-success-bg-subtle);
-    border-radius: var(--bs-border-radius);
-    font-size: 1.125rem;
+    font-size: .625rem;
+    font-weight: 600;
+    text-align: center;
 }
 
 .subscription-qr {
@@ -235,63 +226,8 @@ body.app-body {
     min-width: 2.75rem;
 }
 
-.ot-duty-filter-form .choices,
-.ot-duty-assignment-form .choices {
-    margin-bottom: 0;
-}
-
-.ot-duty-filter-form .choices {
+.ot-duty-filter-form .form-select {
     font-size: .875rem;
-}
-
-.ot-duty-filter-form .choices__inner {
-    min-height: 2rem;
-    padding: .125rem .4375rem;
-    background-color: var(--bs-body-bg);
-    border: var(--bs-border-width) solid var(--bs-border-color);
-    border-radius: var(--bs-border-radius);
-    font-size: .875rem;
-}
-
-.ot-duty-filter-form .choices__list--single {
-    padding: .125rem 1rem .125rem .25rem;
-}
-
-.ot-duty-assignment-form .choices__inner {
-    min-height: 2.375rem;
-    background-color: var(--bs-body-bg);
-    border: var(--bs-border-width) solid var(--bs-border-color);
-    border-radius: var(--bs-border-radius);
-}
-
-.ot-duty-filter-form .choices.is-focused .choices__inner,
-.ot-duty-filter-form .choices.is-open .choices__inner,
-.ot-duty-assignment-form .choices.is-focused .choices__inner,
-.ot-duty-assignment-form .choices.is-open .choices__inner {
-    border-color: var(--bs-primary);
-    box-shadow: 0 0 0 .25rem rgba(var(--bs-primary-rgb), .25);
-}
-
-.ot-duty-filter-form .choices__list--dropdown,
-.ot-duty-assignment-form .choices__list--dropdown {
-    z-index: 20;
-    border-color: var(--bs-border-color);
-    border-radius: var(--bs-border-radius);
-}
-
-.ot-duty-filter-form .choices__list--dropdown .choices__item,
-.ot-duty-assignment-form .choices__list--dropdown .choices__item {
-    font-size: .875rem;
-}
-
-.ot-duty-filter-form .choices[data-type*="select-one"] .choices__input,
-.ot-duty-assignment-form .choices[data-type*="select-one"] .choices__input {
-    min-height: 2.5rem;
-    margin: 0;
-    padding: .5625rem .75rem;
-    background-color: var(--bs-tertiary-bg);
-    border: 0;
-    border-bottom: var(--bs-border-width) solid var(--bs-border-color);
 }
 
 @media (max-width: 991.98px) {

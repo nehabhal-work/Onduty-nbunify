@@ -10,7 +10,7 @@
         </div>
 
         <a href="{{ route('ot-duty.index') }}" class="btn btn-outline-secondary">
-            <i class="bi bi-arrow-left me-1"></i> Back
+            Back
         </a>
     </div>
 
@@ -27,7 +27,7 @@
 
                 <div class="border-top mt-4 pt-3">
                     <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-save me-1"></i> Save Assignment
+                        Save Assignment
                     </button>
 
                     <a href="{{ route('ot-duty.index') }}" class="btn btn-outline-secondary ms-2">

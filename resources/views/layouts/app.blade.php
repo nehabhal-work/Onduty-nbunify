@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'OT Duty') | DY Patil Hospital</title>
 
-    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/bootstrap.min.css') }}?v={{ filemtime(public_path('vendor/bootstrap/bootstrap.min.css')) }}">
-    <link rel="stylesheet" href="{{ asset('vendor/bootstrap-icons/bootstrap-icons.min.css') }}?v={{ filemtime(public_path('vendor/bootstrap-icons/bootstrap-icons.min.css')) }}">
-    <link rel="stylesheet" href="{{ asset('vendor/choices/choices.min.css') }}?v={{ filemtime(public_path('vendor/choices/choices.min.css')) }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ filemtime(public_path('css/app.css')) }}">
+    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body class="app-body">
     <div class="app-shell">
         <aside class="offcanvas-lg offcanvas-start app-sidebar" tabindex="-1" id="appSidebar" aria-labelledby="sidebarTitle">
             <div class="sidebar-brand">
-                <div class="brand-mark"><i class="bi bi-heart-pulse-fill"></i></div>
+                <div class="brand-mark" aria-hidden="true">+</div>
                 <div>
                     <div class="brand-name">DY Patil Hospital</div>
                     <div class="brand-caption">Operation Theatre</div>
@@ -26,15 +24,15 @@
             <nav class="sidebar-nav" aria-label="Main navigation">
                 @auth
                     <a href="{{ route('dashboard') }}" class="sidebar-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                        <i class="bi bi-grid-1x2"></i><span>Dashboard</span>
+                        <span>Dashboard</span>
                     </a>
                 @endauth
                 <a href="{{ route('ot-duty.index') }}" class="sidebar-link {{ request()->routeIs('ot-duty.*') ? 'active' : '' }}">
-                    <i class="bi bi-calendar2-check"></i><span>OT Duty Assignment</span>
+                    <span>OT Duty Assignment</span>
                 </a>
                 @can('manage-ot-duty')
                     <a href="{{ route('ot-duty.create') }}" class="sidebar-link {{ request()->routeIs('ot-duty.create') ? 'active' : '' }}">
-                        <i class="bi bi-plus-circle"></i><span>New Assignment</span>
+                        <span>New Assignment</span>
                     </a>
                 @endcan
             </nav>
@@ -51,12 +49,12 @@
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="sidebar-link sidebar-logout">
-                            <i class="bi bi-box-arrow-left"></i><span>Log out</span>
+                            <span>Log out</span>
                         </button>
                     </form>
                 @else
                     <a href="{{ route('login') }}" class="sidebar-link">
-                        <i class="bi bi-box-arrow-in-right"></i><span>Staff login</span>
+                        <span>Staff login</span>
                     </a>
                 @endauth
             </div>
@@ -65,11 +63,18 @@
         <div class="app-main">
             <header class="app-topbar">
                 <button class="btn btn-outline-secondary sidebar-toggle d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#appSidebar" aria-controls="appSidebar" aria-label="Open menu">
-                    <i class="bi bi-list"></i>
+                    <span>Menu</span>
                 </button>
                 <div class="topbar-title">@yield('page-heading', 'OT Duty Assignment')</div>
-                <div class="topbar-date"><i class="bi bi-calendar3 me-2"></i>{{ now()->format('l, d M Y') }}</div>
+                <div class="topbar-date">{{ now()->format('l, d M Y') }}</div>
             </header>
+
+            @if ($subscriptionTrialActive)
+                <div class="trial-notice">
+                    <span>Free trial <span data-trial-countdown data-trial-ends-at="{{ $subscriptionTrialEndsAt->toIso8601String() }}"></span></span>
+                    <span class="trial-end-date">ending {{ $subscriptionTrialEndsAt->format('d M Y') }}</span>
+                </div>
+            @endif
 
             <main class="app-content">
                 @yield('content')
@@ -77,9 +82,7 @@
         </div>
     </div>
 
-    <script src="{{ asset('vendor/bootstrap/bootstrap.bundle.min.js') }}?v={{ filemtime(public_path('vendor/bootstrap/bootstrap.bundle.min.js')) }}"></script>
-    <script src="{{ asset('vendor/choices/choices.min.js') }}?v={{ filemtime(public_path('vendor/choices/choices.min.js')) }}"></script>
-    <script src="{{ asset('vendor/qrcode/qrcode.min.js') }}?v={{ filemtime(public_path('vendor/qrcode/qrcode.min.js')) }}"></script>
-    <script src="{{ asset('js/app.js') }}?v={{ filemtime(public_path('js/app.js')) }}"></script>
+    <script src="{{ asset('vendor/bootstrap/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

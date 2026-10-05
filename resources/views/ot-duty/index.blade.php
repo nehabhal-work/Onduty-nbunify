@@ -13,8 +13,6 @@
         }
 
         .action-btn {
-            width: 32px;
-            height: 32px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -40,10 +38,10 @@
             @can('manage-ot-duty')
                 <div class="d-flex flex-wrap gap-2">
                     <a href="{{ route('staff-directory.index') }}" class="btn btn-outline-secondary">
-                        <i class="bi bi-people me-1"></i> Manage staff
+                        Manage staff
                     </a>
                     <a href="{{ route('ot-duty.create') }}" class="btn btn-primary">
-                        <i class="bi bi-plus-lg me-1"></i> Add Assignment
+                        Add Assignment
                     </a>
                 </div>
             @endcan
@@ -51,7 +49,6 @@
 
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show">
-                <i class="bi bi-check-circle me-1"></i>
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
@@ -137,7 +134,7 @@
 
                         <div class="col-xl-2 col-md-12 d-flex align-items-end gap-2">
                             <button type="submit" class="btn btn-primary btn-sm flex-grow-1">
-                                <i class="bi bi-search me-1"></i> Search
+                                Search
                             </button>
 
                             <a href="{{ route('ot-duty.index') }}" class="btn btn-outline-secondary btn-sm">
@@ -232,12 +229,12 @@
 
                                             <a href="{{ route('ot-duty.show', $otDuty) }}"
                                                 class="btn btn-sm btn-outline-info action-btn" title="View">
-                                                <i class="bi bi-eye"></i>
+                                                View
                                             </a>
 
                                             <a href="{{ route('ot-duty.edit', $otDuty) }}"
                                                 class="btn btn-sm btn-outline-primary action-btn" title="Edit">
-                                                <i class="bi bi-pencil"></i>
+                                                Edit
                                             </a>
 
                                             <form action="{{ route('ot-duty.destroy', $otDuty) }}" method="POST"
@@ -248,7 +245,7 @@
 
                                                 <button type="submit" class="btn btn-sm btn-outline-danger action-btn"
                                                     title="Delete">
-                                                    <i class="bi bi-trash"></i>
+                                                    Delete
                                                 </button>
                                             </form>
 
@@ -261,7 +258,6 @@
 
                                 <tr>
                                     <td colspan="{{ auth()->check() ? 11 : 10 }}" class="text-center py-5 text-muted">
-                                        <i class="bi bi-inbox fs-3 d-block mb-2"></i>
                                         No OT duty assignments found.
                                     </td>
                                 </tr>

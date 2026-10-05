@@ -15,11 +15,11 @@
         <div class="d-flex gap-2">
             @can('manage-ot-duty')
                 <a href="{{ route('ot-duty.edit', $otDuty) }}" class="btn btn-primary">
-                    <i class="bi bi-pencil me-1"></i> Edit assignment
+                    Edit assignment
                 </a>
             @endcan
             <a href="{{ route('ot-duty.index') }}" class="btn btn-outline-secondary">
-                <i class="bi bi-arrow-left me-1"></i> Back to list
+                Back to list
             </a>
         </div>
     </div>

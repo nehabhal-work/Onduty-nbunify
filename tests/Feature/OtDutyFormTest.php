@@ -61,7 +61,7 @@ class OtDutyFormTest extends TestCase
         $response->assertSee('data-duty-field="unit_no"', false);
         $response->assertSee('data-duty-field="technician_name"', false);
         $response->assertSee('data-duty-field="surgery"', false);
-        $response->assertSee('searchable-select', false);
+        $response->assertSee('form-select', false);
 
         foreach (OtDutyOptions::sections() as $section) {
             $response->assertSee($section);

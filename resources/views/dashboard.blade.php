@@ -13,7 +13,7 @@
         </div>
         @can('manage-ot-duty')
             <a href="{{ route('ot-duty.create') }}" class="btn btn-primary">
-                <i class="bi bi-plus-lg me-1"></i> New assignment
+                New assignment
             </a>
         @endcan
     </div>
@@ -21,19 +21,19 @@
     <div class="row g-3 mb-4">
         <div class="col-sm-6 col-xl-4">
             <div class="card border-0 shadow-sm h-100"><div class="card-body d-flex align-items-center gap-3 p-4">
-                <div class="dashboard-metric-icon rounded-2 text-success bg-success-subtle"><i class="bi bi-calendar2-week fs-5"></i></div>
+                <div class="dashboard-metric-icon rounded-2 text-success bg-success-subtle" aria-hidden="true">Today</div>
                 <div><div class="text-muted small">Assignments today</div><div class="fs-3 fw-semibold">{{ $todayAssignments }}</div></div>
             </div></div>
         </div>
         <div class="col-sm-6 col-xl-4">
             <div class="card border-0 shadow-sm h-100"><div class="card-body d-flex align-items-center gap-3 p-4">
-                <div class="dashboard-metric-icon rounded-2 text-warning bg-warning-subtle"><i class="bi bi-clock-history fs-5"></i></div>
+                <div class="dashboard-metric-icon rounded-2 text-warning bg-warning-subtle" aria-hidden="true">Soon</div>
                 <div><div class="text-muted small">Upcoming duties</div><div class="fs-3 fw-semibold">{{ $upcomingCount }}</div></div>
             </div></div>
         </div>
         <div class="col-sm-6 col-xl-4">
             <div class="card border-0 shadow-sm h-100"><div class="card-body d-flex align-items-center gap-3 p-4">
-                <div class="dashboard-metric-icon rounded-2 text-danger bg-danger-subtle"><i class="bi bi-clipboard2-pulse fs-5"></i></div>
+                <div class="dashboard-metric-icon rounded-2 text-danger bg-danger-subtle" aria-hidden="true">All</div>
                 <div><div class="text-muted small">All assignments</div><div class="fs-3 fw-semibold">{{ $totalAssignments }}</div></div>
             </div></div>
         </div>

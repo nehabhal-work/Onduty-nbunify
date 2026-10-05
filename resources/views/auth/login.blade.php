@@ -32,7 +32,7 @@
                                 <button type="button" class="btn btn-outline-secondary password-toggle"
                                     data-password-toggle aria-controls="password" aria-label="Show password"
                                     aria-pressed="false" title="Show password">
-                                    <i class="bi bi-eye" aria-hidden="true"></i>
+                                    Show
                                 </button>
                             </div>
                         </div>

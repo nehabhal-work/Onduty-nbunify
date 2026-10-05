@@ -11,7 +11,7 @@
             <h1 class="h3 mb-1">{{ $staffMember ? 'Edit staff member' : 'Add '.($type === 'sister' ? 'sister' : 'technician') }}</h1>
             <p class="text-muted mb-0">Only the name is required. Contact and address details are optional.</p>
         </div>
-        <a href="{{ route('staff-directory.index') }}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-1"></i> Back to staff</a>
+        <a href="{{ route('staff-directory.index') }}" class="btn btn-outline-secondary">Back to staff</a>
     </div>
 
     @if ($errors->any())
@@ -51,7 +51,7 @@
                             <textarea id="address" name="address" class="form-control @error('address') is-invalid @enderror" rows="3" maxlength="500">{{ old('address', $staffMember?->address) }}</textarea>
                             @error('address')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg me-1"></i> {{ $staffMember ? 'Save changes' : 'Add staff member' }}</button>
+                        <button type="submit" class="btn btn-primary">{{ $staffMember ? 'Save changes' : 'Add staff member' }}</button>
                         <a href="{{ route('staff-directory.index') }}" class="btn btn-outline-secondary ms-2">Cancel</a>
                     </form>
                 </div>

@@ -6,7 +6,7 @@
 
     <div class="col-md-3">
         <label class="form-label">Section <span class="text-danger">*</span></label>
-        <select name="section" id="duty-section" class="form-select searchable-select @error('section') is-invalid @enderror" required>
+        <select name="section" id="duty-section" class="form-select @error('section') is-invalid @enderror" required>
             @foreach ($sections as $section)
                 <option value="{{ $section }}" @selected(old('section', $otDuty->section ?? '2nd floor section') === $section)>
                     {{ $section }}
@@ -23,7 +23,7 @@
             <label class="form-label">Sister Name <span class="text-danger">*</span></label>
             @can('manage-staff-directory')<a class="small text-decoration-none mb-2" href="{{ route('staff-directory.create', ['type' => 'sister']) }}">Manage</a>@endcan
         </div>
-        <select name="sister_name" class="form-select searchable-select @error('sister_name') is-invalid @enderror" required>
+        <select name="sister_name" class="form-select @error('sister_name') is-invalid @enderror" required>
             <option value="">Select Sister</option>
             @foreach ($sisters as $sister)
                 <option value="{{ $sister }}" @selected(old('sister_name', $otDuty->sister_name ?? '') === $sister)>
@@ -41,7 +41,7 @@
             <label class="form-label">Technician Name <span class="text-danger">*</span></label>
             @can('manage-staff-directory')<a class="small text-decoration-none mb-2" href="{{ route('staff-directory.create', ['type' => 'technician']) }}">Manage</a>@endcan
         </div>
-        <select name="technician_name" class="form-select searchable-select @error('technician_name') is-invalid @enderror" required>
+        <select name="technician_name" class="form-select @error('technician_name') is-invalid @enderror" required>
             <option value="">Select Technician</option>
             @foreach ($technicians as $technician)
                 <option value="{{ $technician }}" @selected(old('technician_name', $otDuty->technician_name ?? '') === $technician)>
@@ -66,7 +66,7 @@
 
     <div class="col-md-3" data-duty-field="ot_no">
         <label class="form-label">OT No <span class="text-danger">*</span></label>
-        <select name="ot_no" class="form-select searchable-select @error('ot_no') is-invalid @enderror" required>
+        <select name="ot_no" class="form-select @error('ot_no') is-invalid @enderror" required>
             <option value="">Select OT</option>
             @foreach ($otNumbers as $ot)
                 <option value="{{ $ot }}"
@@ -84,7 +84,7 @@
 
     <div class="col-md-3">
         <label class="form-label">Shift <span class="text-danger">*</span></label>
-        <select name="shift" class="form-select searchable-select @error('shift') is-invalid @enderror" required>
+        <select name="shift" class="form-select @error('shift') is-invalid @enderror" required>
             <option value="">Select Shift</option>
             @foreach ($shifts as $shift)
                 <option value="{{ $shift }}" @selected(old('shift', $otDuty->shift ?? '') === $shift)>
@@ -99,7 +99,7 @@
 
     <div class="col-md-3" data-duty-field="department">
         <label class="form-label">Department <span class="text-danger">*</span></label>
-        <select name="department" class="form-select searchable-select @error('department') is-invalid @enderror" required>
+        <select name="department" class="form-select @error('department') is-invalid @enderror" required>
             <option value="">Select Department</option>
             @foreach ($departments as $department)
                 <option value="{{ $department }}" @selected(old('department', $otDuty->department ?? '') === $department)>
@@ -114,7 +114,7 @@
 
     <div class="col-md-3" data-duty-field="unit_no">
         <label class="form-label">Unit No <span class="text-danger">*</span></label>
-        <select name="unit_no" class="form-select searchable-select @error('unit_no') is-invalid @enderror" required>
+        <select name="unit_no" class="form-select @error('unit_no') is-invalid @enderror" required>
             <option value="">Select Unit</option>
             @foreach ($units as $unit)
                 <option value="{{ $unit }}" @selected((string) old('unit_no', $otDuty->unit_no ?? '') === (string) $unit)>
@@ -146,4 +146,3 @@
     </div>
 
 </div>
-

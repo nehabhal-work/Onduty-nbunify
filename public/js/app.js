@@ -1,23 +1,7 @@
-document.querySelectorAll('[data-upi-qr]').forEach(async (image) => {
-	const paymentUrl = new URL('upi://pay');
-	paymentUrl.searchParams.set('pa', image.dataset.upiId);
-	paymentUrl.searchParams.set('pn', image.dataset.payeeName);
-
-	try {
-		image.src = await window.QRCode.toDataURL(paymentUrl.toString(), {
-			width: 320,
-			margin: 2,
-		});
-	} catch {
-		image.hidden = true;
-	}
-});
-
 document.querySelectorAll('[data-password-toggle]').forEach((toggle) => {
 	const input = document.getElementById(toggle.getAttribute('aria-controls'));
-	const icon = toggle.querySelector('i');
 
-	if (!input || !icon) return;
+	if (!input) return;
 
 	toggle.addEventListener('click', () => {
 		const isVisible = input.type === 'text';
@@ -27,8 +11,7 @@ document.querySelectorAll('[data-password-toggle]').forEach((toggle) => {
 		toggle.setAttribute('aria-label', label);
 		toggle.setAttribute('title', label);
 		toggle.setAttribute('aria-pressed', String(!isVisible));
-		icon.classList.toggle('bi-eye', isVisible);
-		icon.classList.toggle('bi-eye-slash', !isVisible);
+		toggle.textContent = isVisible ? 'Show' : 'Hide';
 	});
 });
 
@@ -49,19 +32,6 @@ document.querySelectorAll('[data-trial-countdown]').forEach((countdown) => {
 	window.setInterval(updateCountdown, 1000);
 });
 
-const searchableChoices = new WeakMap();
-
-document.querySelectorAll('.ot-duty-filter-form select, .searchable-select').forEach((select) => {
-	searchableChoices.set(select, new window.Choices(select, {
-		allowHTML: false,
-		itemSelectText: '',
-		searchEnabled: true,
-		searchPlaceholderValue: 'Search options...',
-		searchResultLimit: 100,
-		shouldSort: false,
-	}));
-});
-
 document.querySelectorAll('#duty-section').forEach((sectionSelect) => {
 	const form = sectionSelect.closest('form');
 	const otSelect = form.querySelector('[name="ot_no"]');
@@ -74,21 +44,6 @@ document.querySelectorAll('#duty-section').forEach((sectionSelect) => {
 		'Scope OT section': { technician_name: true, ot_no: false, department: true, unit_no: true, surgery: true },
 	};
 	const restrictedOtNumbers = new Set(['17', '18', '19', '20', '21']);
-
-	const refreshChoices = (select) => {
-		const instance = searchableChoices.get(select);
-		if (!instance) return;
-
-		const choices = [...select.options].map((option) => ({
-			value: option.value,
-			label: option.textContent.trim(),
-			selected: option.selected,
-			disabled: option.disabled,
-			placeholder: option.value === '',
-		}));
-
-		instance.setChoices(choices, 'value', 'label', true);
-	};
 
 	const updateSectionFields = () => {
 		const section = sectionSelect.value;
@@ -118,9 +73,6 @@ document.querySelectorAll('#duty-section').forEach((sectionSelect) => {
 		});
 		if (section === 'LR section') departmentSelect.value = 'OBGY';
 
-		refreshChoices(form.querySelector('[name="technician_name"]'));
-		refreshChoices(otSelect);
-		refreshChoices(departmentSelect);
 	};
 
 	sectionSelect.addEventListener('change', updateSectionFields);

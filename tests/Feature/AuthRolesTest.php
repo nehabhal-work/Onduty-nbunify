@@ -28,6 +28,11 @@ class AuthRolesTest extends TestCase
 
     public function test_login_page_is_accessible_and_manager_cannot_create_assignment(): void
     {
+        $this->assertFileExists(public_path('vendor/bootstrap/bootstrap.min.css'));
+        $this->assertFileExists(public_path('vendor/bootstrap/bootstrap.bundle.min.js'));
+        $this->assertFileExists(public_path('css/app.css'));
+        $this->assertFileExists(public_path('js/app.js'));
+
         $admin = User::factory()->create([
             'email' => 'admin@example.com',
             'role' => 'admin',
@@ -42,10 +47,12 @@ class AuthRolesTest extends TestCase
             ->assertOk()
             ->assertSee('data-password-toggle', false)
             ->assertSee('aria-label="Show password"', false)
-            ->assertSee('href="'.asset('css/app.css').'?v=', false)
-            ->assertSee('src="'.asset('js/app.js').'?v=', false)
-            ->assertSee('href="'.asset('vendor/bootstrap/bootstrap.min.css').'?v=', false)
-            ->assertSee('src="'.asset('vendor/qrcode/qrcode.min.js').'?v=', false)
+            ->assertSee('href="'.asset('css/app.css').'"', false)
+            ->assertSee('src="'.asset('js/app.js').'"', false)
+            ->assertSee('href="'.asset('vendor/bootstrap/bootstrap.min.css').'"', false)
+            ->assertDontSee('choices.min.js', false)
+            ->assertDontSee('qrcode.min.js', false)
+            ->assertDontSee('bootstrap-icons', false)
             ->assertDontSee('@vite', false);
 
         $this->actingAs($admin)->get('/ot-duty/create')->assertOk();

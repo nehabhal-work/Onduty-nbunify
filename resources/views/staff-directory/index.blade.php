@@ -12,8 +12,8 @@
             <p class="text-muted mb-0">Manage the staff names available in assignment forms.</p>
         </div>
         <div class="d-flex flex-wrap gap-2">
-            <a href="{{ route('staff-directory.create', ['type' => 'sister']) }}" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i> Add Sister</a>
-            <a href="{{ route('staff-directory.create', ['type' => 'technician']) }}" class="btn btn-outline-primary"><i class="bi bi-plus-lg me-1"></i> Add Technician</a>
+            <a href="{{ route('staff-directory.create', ['type' => 'sister']) }}" class="btn btn-primary">Add Sister</a>
+            <a href="{{ route('staff-directory.create', ['type' => 'technician']) }}" class="btn btn-outline-primary">Add Technician</a>
         </div>
     </div>
 
@@ -49,11 +49,11 @@
                                         </td>
                                         <td class="small">{{ $member->address ?: '-' }}</td>
                                         <td class="text-end text-nowrap pe-4">
-                                            <a href="{{ route('staff-directory.edit', $member) }}" class="btn btn-sm btn-outline-primary" aria-label="Edit {{ $member->name }}" title="Edit"><i class="bi bi-pencil"></i></a>
+                                            <a href="{{ route('staff-directory.edit', $member) }}" class="btn btn-sm btn-outline-primary" aria-label="Edit {{ $member->name }}" title="Edit">Edit</a>
                                             <form action="{{ route('staff-directory.destroy', $member) }}" method="POST" class="d-inline" onsubmit="return confirm('Remove {{ $member->name }} from this staff directory?')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-outline-danger" aria-label="Remove {{ $member->name }}" title="Remove"><i class="bi bi-trash"></i></button>
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" aria-label="Remove {{ $member->name }}" title="Remove">Remove</button>
                                             </form>
                                         </td>
                                     </tr>

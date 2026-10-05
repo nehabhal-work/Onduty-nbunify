@@ -18,7 +18,7 @@
     </div>
 
     @if (session('success'))
-        <div class="alert alert-success"><i class="bi bi-check-circle me-2"></i>{{ session('success') }}</div>
+        <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
     @if ($errors->any())
@@ -37,8 +37,9 @@
                         </div>
                     @elseif ($settings->upi_id)
                         <div class="mb-4">
-                            <div class="small text-muted fw-semibold mb-2">SCAN TO PAY WITH UPI</div>
-                            <img class="subscription-qr" data-upi-qr data-upi-id="{{ $settings->upi_id }}" data-payee-name="NBUNIFY PRIVATE LIMITED" alt="UPI payment QR code">
+                            <div class="small text-muted fw-semibold mb-2">PAY WITH UPI</div>
+                            <p class="mb-2">UPI ID: <strong>{{ $settings->upi_id }}</strong></p>
+                            <a class="btn btn-outline-primary" href="upi://pay?pa={{ urlencode($settings->upi_id) }}&amp;pn={{ urlencode('NBUNIFY PRIVATE LIMITED') }}&amp;cu=INR">Open UPI app</a>
                         </div>
                     @endif
 
@@ -56,7 +57,7 @@
                         </div>
                     @endif
 
-                    @unless ($settings->qr_code_path || $settings->bank_details)
+                    @unless ($settings->qr_code_path || $settings->bank_details || $settings->upi_id)
                         <p class="text-muted mb-0">Payment details have not been configured yet. Please contact the system administrator.</p>
                     @endunless
                 </div>
@@ -67,7 +68,7 @@
             <section class="card border-0 shadow-sm mb-4">
                 <div class="card-body p-4">
                     <div class="d-flex align-items-start gap-3">
-                        <div class="subscription-status-icon"><i class="bi {{ $hasAccess ? 'bi-unlock' : 'bi-lock' }}"></i></div>
+                        <span class="badge {{ $hasAccess ? 'text-bg-success' : 'text-bg-danger' }}">{{ $hasAccess ? 'Active' : 'Expired' }}</span>
                         <div>
                             <div class="small text-muted">ACCESS STATUS</div>
                             <h2 class="h5 mb-1">{{ $hasAccess ? 'Access available' : 'Renewal required' }}</h2>
@@ -106,7 +107,7 @@
                             <input id="payment_screenshot" type="file" name="payment_screenshot" class="form-control" accept="image/jpeg,image/png,image/webp" required>
                             <div class="form-text">JPG, PNG, or WebP, maximum 5 MB. Only superadmin can view it.</div>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100"><i class="bi bi-send me-1"></i> Submit payment reference</button>
+                        <button type="submit" class="btn btn-primary w-100">Submit payment reference</button>
                     </form>
                 </div>
             </section>

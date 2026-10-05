@@ -21,6 +21,12 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+## Deployment
+
+Point the web server document root at this project's `public/` directory, which contains `index.php`, `.htaccess`, and the static assets. There is no `dist/` directory or frontend build step. Bootstrap CSS and JavaScript are served locally from `public/vendor/bootstrap/`; the application stylesheet and JavaScript are `public/css/app.css` and `public/js/app.js`.
+
+Install the Laravel PHP dependencies with Composer as usual. No npm, Node.js, or Vite step is required.
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.

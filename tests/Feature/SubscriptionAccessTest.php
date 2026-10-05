@@ -38,7 +38,7 @@ class SubscriptionAccessTest extends TestCase
             ->assertSee('ending '.now()->addDays(15)->format('d M Y'));
     }
 
-    public function test_payment_page_shows_hdfc_details_and_generates_upi_qr(): void
+    public function test_payment_page_shows_hdfc_details_and_a_upi_payment_link(): void
     {
         $this->get('/subscription/payment')
             ->assertOk()
@@ -46,7 +46,7 @@ class SubscriptionAccessTest extends TestCase
             ->assertSee('502000117622680')
             ->assertSee('HDFC0002504')
             ->assertSee('7710020126@hdfc')
-            ->assertSee('data-upi-qr', false);
+            ->assertSee('Open UPI app');
     }
 
     public function test_uploaded_payment_qr_uses_the_current_request_host(): void

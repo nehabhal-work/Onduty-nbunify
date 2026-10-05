@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <p class="form-text mb-3">The 3-minute test starts immediately and clears any paid-through date. To test lockout after three minutes, check as a manager or guest; superadmins retain access.</p>
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-calendar-check me-1"></i> Save trial schedule</button>
+                        <button type="submit" class="btn btn-primary">Save trial schedule</button>
                     </form>
 
                     <hr class="my-4">
@@ -90,7 +90,7 @@
                         @if ($settings->qr_code_path)
                             <img class="subscription-qr mb-3" src="{{ url('/storage/'.$settings->qr_code_path) }}" alt="Current payment QR code">
                         @endif
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Save settings</button>
+                        <button type="submit" class="btn btn-primary">Save settings</button>
                     </form>
                 </div>
             </section>
