@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'OT Duty') | DY Patil Hospital</title>
 
+    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/bootstrap.min.css') }}?v={{ filemtime(public_path('vendor/bootstrap/bootstrap.min.css')) }}">
+    <link rel="stylesheet" href="{{ asset('vendor/bootstrap-icons/bootstrap-icons.min.css') }}?v={{ filemtime(public_path('vendor/bootstrap-icons/bootstrap-icons.min.css')) }}">
+    <link rel="stylesheet" href="{{ asset('vendor/choices/choices.min.css') }}?v={{ filemtime(public_path('vendor/choices/choices.min.css')) }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ filemtime(public_path('css/app.css')) }}">
 </head>
 <body class="app-body">
@@ -74,6 +77,9 @@
         </div>
     </div>
 
-    <script type="module" src="{{ asset('js/app.js') }}?v={{ filemtime(public_path('js/app.js')) }}"></script>
+    <script src="{{ asset('vendor/bootstrap/bootstrap.bundle.min.js') }}?v={{ filemtime(public_path('vendor/bootstrap/bootstrap.bundle.min.js')) }}"></script>
+    <script src="{{ asset('vendor/choices/choices.min.js') }}?v={{ filemtime(public_path('vendor/choices/choices.min.js')) }}"></script>
+    <script src="{{ asset('vendor/qrcode/qrcode.min.js') }}?v={{ filemtime(public_path('vendor/qrcode/qrcode.min.js')) }}"></script>
+    <script src="{{ asset('js/app.js') }}?v={{ filemtime(public_path('js/app.js')) }}"></script>
 </body>
 </html>
