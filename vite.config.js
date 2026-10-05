@@ -1,9 +1,12 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+    publicDir: false,
     build: {
+        outDir: 'public/build',
+        manifest: 'manifest.json',
         rollupOptions: {
-            input: 'resources/js/app.js',
+            input: ['resources/css/app.css', 'resources/js/app.js'],
         },
     },
     server: {

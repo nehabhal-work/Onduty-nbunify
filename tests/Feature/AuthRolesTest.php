@@ -42,8 +42,8 @@ class AuthRolesTest extends TestCase
             ->assertOk()
             ->assertSee('data-password-toggle', false)
             ->assertSee('aria-label="Show password"', false)
-            ->assertSee('href="'.asset('css/app.css').'"', false)
-            ->assertSee('src="'.asset('js/app.js').'"', false)
+            ->assertSee('href="'.asset('css/app.css').'?v=', false)
+            ->assertSee('src="'.asset('js/app.js').'?v=', false)
             ->assertDontSee('@vite', false);
 
         $this->actingAs($admin)->get('/ot-duty/create')->assertOk();
