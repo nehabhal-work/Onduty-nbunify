@@ -6,7 +6,7 @@
     <title>@yield('title', 'OT Duty') | DY Patil Hospital</title>
 
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ filemtime(public_path('css/app.css')) }}">
 </head>
 <body class="app-body">
     <div class="app-shell">
@@ -17,7 +17,7 @@
                     <div class="brand-name">DY Patil Hospital</div>
                     <div class="brand-caption">Operation Theatre</div>
                 </div>
-                <button type="button" class="btn-close d-lg-none ms-auto" data-bs-dismiss="offcanvas" aria-label="Close menu"></button>
+                <button type="button" class="btn-close btn-close-white d-lg-none ms-auto" data-bs-dismiss="offcanvas" aria-label="Close menu"></button>
             </div>
 
             <div id="sidebarTitle" class="sidebar-section-label">WORKSPACE</div>
@@ -66,7 +66,9 @@
         <div class="app-main">
             <header class="app-topbar">
                 <button class="btn btn-outline-secondary sidebar-toggle d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#appSidebar" aria-controls="appSidebar" aria-label="Open menu">
-                    <span>Menu</span>
+                    <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                    </svg>
                 </button>
                 <div class="topbar-title">@yield('page-heading', 'OT Duty Assignment')</div>
                 <div class="topbar-date">{{ now()->format('l, d M Y') }}</div>
@@ -86,6 +88,6 @@
     </div>
 
     <script src="{{ asset('vendor/bootstrap/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}?v={{ filemtime(public_path('js/app.js')) }}"></script>
 </body>
 </html>

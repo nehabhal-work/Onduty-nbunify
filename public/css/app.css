@@ -10,6 +10,8 @@ body.app-body {
 
 .app-sidebar {
     --bs-offcanvas-width: 16.5rem;
+    --bs-offcanvas-color: var(--bs-light);
+    --bs-offcanvas-bg: var(--bs-dark);
     position: fixed;
     inset: 0 auto 0 0;
     z-index: 1030;
@@ -196,8 +198,12 @@ body.app-body {
 }
 
 .sidebar-toggle {
+    display: inline-flex;
+    width: 2.375rem;
     height: 2.375rem;
-    padding: .375rem .75rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
 
 .dashboard-metric-icon {
@@ -232,8 +238,10 @@ body.app-body {
 }
 
 @media (max-width: 991.98px) {
+    /* Sit above Bootstrap's offcanvas backdrop (z-index 1040) so links are tappable. */
     .app-sidebar {
         position: fixed;
+        z-index: 1045;
     }
 
     .app-main {
