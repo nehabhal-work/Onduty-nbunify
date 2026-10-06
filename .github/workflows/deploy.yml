@@ -1,39 +1,57 @@
-name: Deploy
+name: 🚀 Deploy OT Duty
 
-# Runs only after the "Tests" workflow passes on main.
 on:
-  workflow_run:
-    workflows: [Tests]
-    types: [completed]
-    branches: [main]
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   deploy:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-    env:
-      # Project folder on the server - change this to your real path.
-      DEPLOY_PATH: /var/www/on-duty
 
     steps:
-      - name: Deploy over SSH
-        uses: appleboy/ssh-action@v1
+      - name: 🚀 Deploy to server
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          envs: DEPLOY_PATH
           script: |
             set -e
-            cd "$DEPLOY_PATH"
-            php artisan down || true
+
+            # Project folder on the server - change this to your real path.
+            cd /var/www/on-duty
+
+            COMPOSER_BIN="/usr/local/bin/composer"
+
+            # Get latest code
             git fetch origin main
             git reset --hard origin/main
-            composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+
+            # Install dependencies
+            php $COMPOSER_BIN install \
+              --no-dev \
+              --optimize-autoloader \
+              --no-interaction
+
+            # Ensure permissions
+            chmod -R 775 storage bootstrap/cache
+
+            # Database changes
             php artisan migrate --force
+            php artisan db:seed --force
+
+            # Storage link
+            php artisan storage:link || true
+
+            # Clear old caches
+            php artisan optimize:clear
+
+            # Rebuild caches for production
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
-            php artisan up
+
+            echo "✅ OT Duty deployment completed!"

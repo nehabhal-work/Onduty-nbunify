@@ -31,7 +31,7 @@
             <div>
                 <h4 class="mb-1">OT Duty Assignments</h4>
                 <p class="text-muted mb-0">
-                    Manage Sister and Technician OT assignments.
+                    Manage Sister and Technician OT assignments teasting.
                 </p>
             </div>
 
