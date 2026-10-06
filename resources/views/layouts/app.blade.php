@@ -11,10 +11,9 @@
 <body class="app-body">
     <div class="app-shell">
         <aside class="offcanvas-lg offcanvas-start app-sidebar" tabindex="-1" id="appSidebar" aria-labelledby="sidebarTitle">
-            <div class="sidebar-brand">
-                <div class="brand-mark" aria-hidden="true">+</div>
-                <div>
-                    <div class="brand-name">DY Patil Hospital</div>
+            <div class="sidebar-brand align-items-start">
+                <div class="brand-logo-wrap">
+                    <img src="{{ asset('img/logo.png') }}" alt="DY Patil Hospital" class="brand-logo">
                     <div class="brand-caption">Operation Theatre</div>
                 </div>
                 <button type="button" class="btn-close btn-close-white d-lg-none ms-auto" data-bs-dismiss="offcanvas" aria-label="Close menu"></button>

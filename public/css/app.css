@@ -10,8 +10,11 @@ body.app-body {
 
 .app-sidebar {
     --bs-offcanvas-width: 16.5rem;
-    --bs-offcanvas-color: var(--bs-light);
-    --bs-offcanvas-bg: var(--bs-dark);
+    --sidebar-bg: #0f5132;
+    --sidebar-hover-bg: rgba(255, 255, 255, .18);
+    --sidebar-border: rgba(255, 255, 255, .35);
+    --bs-offcanvas-color: var(--bs-white);
+    --bs-offcanvas-bg: var(--sidebar-bg);
     position: fixed;
     inset: 0 auto 0 0;
     z-index: 1030;
@@ -19,9 +22,9 @@ body.app-body {
     width: 16.5rem;
     flex-direction: column;
     padding: 1.5rem 1rem 1rem;
-    color: var(--bs-light);
+    color: var(--bs-white);
     /* Bootstrap's .offcanvas-lg forces a transparent background on desktop. */
-    background-color: var(--bs-dark) !important;
+    background-color: var(--sidebar-bg) !important;
 }
 
 .sidebar-brand {
@@ -38,9 +41,35 @@ body.app-body {
     width: 2.5rem;
     height: 2.5rem;
     place-items: center;
-    color: var(--bs-light);
-    border: 1px solid var(--bs-secondary);
+    color: var(--bs-white);
+    border: 1px solid var(--sidebar-border);
     border-radius: var(--bs-border-radius);
+}
+
+.brand-logo-wrap {
+    flex: 1;
+    min-width: 0;
+}
+
+.brand-logo {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: .5rem .625rem;
+    background-color: var(--bs-white);
+    border-radius: var(--bs-border-radius);
+}
+
+.brand-logo-wrap .brand-caption {
+    margin-top: .5rem;
+    text-align: center;
+}
+
+.login-logo {
+    display: block;
+    width: min(100%, 15rem);
+    height: auto;
+    margin-inline: auto;
 }
 
 .brand-name {
@@ -52,13 +81,13 @@ body.app-body {
 .brand-caption,
 .staff-role {
     margin-top: .25rem;
-    color: var(--bs-gray-400);
+    color: var(--bs-white);
     font-size: .75rem;
 }
 
 .sidebar-section-label {
     padding: 0 .625rem .625rem;
-    color: var(--bs-gray-400);
+    color: var(--bs-white);
     font-size: .6875rem;
     font-weight: 700;
     letter-spacing: .06em;
@@ -75,7 +104,7 @@ body.app-body {
     align-items: center;
     gap: .75rem;
     padding: 0 .75rem;
-    color: var(--bs-gray-300);
+    color: var(--bs-white);
     text-align: left;
     text-decoration: none;
     background: transparent;
@@ -86,7 +115,7 @@ body.app-body {
 .sidebar-link:hover,
 .sidebar-link.active {
     color: var(--bs-white);
-    background-color: var(--bs-secondary);
+    background-color: var(--sidebar-hover-bg);
 }
 
 .sidebar-link i {
@@ -98,7 +127,7 @@ body.app-body {
 .sidebar-footer {
     margin-top: auto;
     padding-top: 1rem;
-    border-top: 1px solid var(--bs-secondary);
+    border-top: 1px solid var(--sidebar-border);
 }
 
 .staff-identity {
@@ -122,7 +151,7 @@ body.app-body {
 
 .staff-name {
     overflow: hidden;
-    color: var(--bs-light);
+    color: var(--bs-white);
     font-size: .8125rem;
     font-weight: 600;
     text-overflow: ellipsis;

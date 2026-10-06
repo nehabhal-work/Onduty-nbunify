@@ -12,7 +12,8 @@
             <p class="text-muted mb-0">Manage the staff names available in assignment forms.</p>
         </div>
         <div class="d-flex flex-wrap gap-2">
-            <a href="{{ route('staff-directory.create', ['type' => 'sister']) }}" class="btn btn-primary">Add Sister</a>
+            <a href="{{ route('ot-duty.index') }}" class="btn btn-outline-secondary">&larr; Back to OT Assignments</a>
+            <a href="{{ route('staff-directory.create', ['type' => 'sister']) }}" class="btn btn-outline-primary">Add Sister</a>
             <a href="{{ route('staff-directory.create', ['type' => 'technician']) }}" class="btn btn-outline-primary">Add Technician</a>
         </div>
     </div>

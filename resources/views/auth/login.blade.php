@@ -7,6 +7,7 @@
             <div class="card shadow-sm border-0">
                 <div class="card-body p-4 p-md-5">
                     <div class="text-center mb-4">
+                        <img src="{{ asset('img/logo.png') }}" alt="DY Patil Hospital" class="login-logo mb-4">
                         <h3 class="mb-1">Login</h3>
                         <p class="text-muted mb-0">Access OT Duty management</p>
                     </div>

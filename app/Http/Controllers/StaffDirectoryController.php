@@ -23,10 +23,12 @@ class StaffDirectoryController extends Controller
     public function create(Request $request): View
     {
         $type = $request->query('type');
+        $type = in_array($type, StaffMember::TYPES, true) ? $type : 'sister';
 
         return view('staff-directory.form', [
             'staffMember' => null,
-            'type' => in_array($type, StaffMember::TYPES, true) ? $type : 'sister',
+            'type' => $type,
+            'members' => $this->membersOfType($type),
         ]);
     }
 
@@ -55,6 +57,7 @@ class StaffDirectoryController extends Controller
         return view('staff-directory.form', [
             'staffMember' => $staffMember,
             'type' => $staffMember->type,
+            'members' => $this->membersOfType($staffMember->type),
         ]);
     }
 
@@ -100,5 +103,10 @@ class StaffDirectoryController extends Controller
         $staffMember->delete();
 
         return redirect()->route('staff-directory.index')->with('success', 'Staff member removed.');
+    }
+
+    private function membersOfType(string $type)
+    {
+        return StaffMember::query()->where('type', $type)->orderBy('name')->get();
     }
 }
