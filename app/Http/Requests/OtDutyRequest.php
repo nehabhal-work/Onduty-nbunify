@@ -17,13 +17,13 @@ class OtDutyRequest extends FormRequest
     public function rules(): array
     {
         $section = $this->input('section');
-        $requiresTechnician = $section !== 'Recovery section';
-        $requiresOtNumber = in_array($section, ['2nd floor section', '4th floor section'], true);
-        $requiresDepartment = $section !== 'Recovery section';
-        $requiresUnit = in_array($section, ['2nd floor section', 'LR section', 'Scope OT section'], true);
+        $requiresTechnician = $section !== 'Recovery';
+        $requiresOtNumber = in_array($section, ['2nd floor', '4th floor'], true);
+        $requiresDepartment = $section !== 'Recovery';
+        $requiresUnit = in_array($section, ['2nd floor', 'LR OT', 'Scope OT'], true);
         $allowedOtNumbers = match ($section) {
-            '2nd floor section' => array_values(array_diff(OtDutyOptions::otNumbers(), [17, 18, 19, 20, 21])),
-            '4th floor section' => [17, 18, 19, 20, 21],
+            '2nd floor' => array_values(array_diff(OtDutyOptions::otNumbers(), [17, 18, 19, 20, 21])),
+            '4th floor' => [17, 18, 19, 20, 21],
             default => OtDutyOptions::otNumbers(),
         };
 
@@ -65,7 +65,7 @@ class OtDutyRequest extends FormRequest
                 Rule::requiredIf($requiresDepartment),
                 'nullable',
                 'string',
-                Rule::in($section === 'LR section' ? ['OBGY'] : OtDutyOptions::departments()),
+                Rule::in($section === 'LR OT' ? ['OBGY'] : OtDutyOptions::departments()),
             ],
             'unit_no' => [
                 Rule::requiredIf($requiresUnit),
@@ -91,19 +91,19 @@ class OtDutyRequest extends FormRequest
         $section = $this->input('section');
         $values = [];
 
-        if ($section === 'LR section') {
+        if ($section === 'LR OT') {
             $values['department'] = 'OBGY';
-        } elseif ($section === 'Recovery section') {
+        } elseif ($section === 'Recovery') {
             $values['department'] = null;
             $values['technician_name'] = null;
             $values['surgery'] = null;
         }
 
-        if (in_array($section, ['LR section', 'Recovery section', 'Scope OT section'], true)) {
+        if (in_array($section, ['LR OT', 'Recovery', 'Scope OT', 'Night On Call'], true)) {
             $values['ot_no'] = null;
         }
 
-        if (in_array($section, ['4th floor section', 'Recovery section'], true)) {
+        if (in_array($section, ['4th floor', 'Recovery', 'Night On Call'], true)) {
             $values['unit_no'] = null;
         }
 

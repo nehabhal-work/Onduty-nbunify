@@ -30,9 +30,12 @@
                 <a href="{{ route('ot-duty.index') }}" class="sidebar-link {{ request()->routeIs('ot-duty.*') ? 'active' : '' }}">
                     <span>OT Duty Assignment</span>
                 </a>
-                @can('manage-ot-duty')
-                    <a href="{{ route('ot-duty.create') }}" class="sidebar-link {{ request()->routeIs('ot-duty.create') ? 'active' : '' }}">
-                        <span>New Assignment</span>
+                @can('manage-staff-directory')
+                    <a href="{{ route('staff-directory.create', ['type' => 'sister']) }}" class="sidebar-link {{ request()->routeIs('staff-directory.create') && request('type') === 'sister' ? 'active' : '' }}">
+                        <span>Add Sister</span>
+                    </a>
+                    <a href="{{ route('staff-directory.create', ['type' => 'technician']) }}" class="sidebar-link {{ request()->routeIs('staff-directory.create') && request('type') === 'technician' ? 'active' : '' }}">
+                        <span>Add Technician</span>
                     </a>
                 @endcan
             </nav>

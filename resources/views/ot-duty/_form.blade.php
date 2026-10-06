@@ -1,5 +1,13 @@
 @php
     $isEdit = isset($otDuty);
+    $currentSection = old('section', $otDuty->section ?? '2nd floor');
+    $currentSection = [
+        '2nd floor section' => '2nd floor',
+        '4th floor section' => '4th floor',
+        'LR section' => 'LR OT',
+        'Recovery section' => 'Recovery',
+        'Scope OT section' => 'Scope OT',
+    ][$currentSection] ?? $currentSection;
 @endphp
 
 <div class="row g-3">
@@ -8,7 +16,7 @@
         <label class="form-label">Section <span class="text-danger">*</span></label>
         <select name="section" id="duty-section" class="form-select @error('section') is-invalid @enderror" required>
             @foreach ($sections as $section)
-                <option value="{{ $section }}" @selected(old('section', $otDuty->section ?? '2nd floor section') === $section)>
+                <option value="{{ $section }}" @selected($currentSection === $section)>
                     {{ $section }}
                 </option>
             @endforeach

@@ -16,39 +16,62 @@ class OtDutyFormTest extends TestCase
         $expectedSisters = [
             'Aarya',
             'Abdul',
-            'Anuja',
+            'Amrapali',
             'Ashfaq',
             'Aurang',
             'Avinash',
             'Dilip',
             'Dipali N',
+            'Jai',
             'Kailash',
+            'Kirti',
+            'Madhukar',
             'Mayuresh',
             'Mery',
-            'Mrunali',
+            'Mrunal',
             'Nirmala',
             'Noor',
             'Pallavi',
             'Prasad',
-            'Prathamesh',
+            'Purva',
             'Rahel',
+            'Renuka',
+            'Roshani',
+            'Ruchita',
+            'Rupali',
             'Sagar',
             'Sahil',
             'Sai',
-            'Sara',
+            'Sachin',
             'Shraddha',
+            'Shubham',
             'Sonali T',
             'Sudha',
             'Surekha',
             'Surjeet',
             'Tushar',
             'Usha',
+            '-',
         ];
+        sort($expectedSisters, SORT_STRING | SORT_FLAG_CASE);
 
         $expectedTechnicians = $expectedSisters;
 
         $this->assertSame($expectedSisters, OtDutyOptions::sisters());
         $this->assertSame($expectedTechnicians, OtDutyOptions::technicians());
+        $this->assertSame([
+            '2nd floor',
+            '4th floor',
+            'LR OT',
+            'Recovery',
+            'Scope OT',
+            'Night On Call',
+        ], OtDutyOptions::sections());
+        $this->assertSame([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 17, 18, 19, 20, 21], OtDutyOptions::otNumbers());
+        $this->assertSame(['Morning', 'Evening', 'Night', 'Double Duty'], OtDutyOptions::shifts());
+        $this->assertSame([0, 1, 2, 3, 4, 5, 6], OtDutyOptions::units());
+        $this->assertContains('Ophthalmic', OtDutyOptions::departments());
+        $this->assertContains('Pseudodental', OtDutyOptions::departments());
 
         $admin = User::factory()->create(['role' => 'admin']);
         $response = $this->actingAs($admin)->get('/ot-duty/create');
@@ -74,14 +97,14 @@ class OtDutyFormTest extends TestCase
         $admin = User::factory()->create(['role' => 'admin']);
 
         $this->actingAs($admin)
-            ->post('/ot-duty', array_merge($this->assignment('Recovery section'), [
+            ->post('/ot-duty', array_merge($this->assignment('Recovery'), [
                 'technician_name' => '',
                 'surgery' => '',
             ]))
             ->assertRedirect(route('ot-duty.index'));
 
         $this->assertDatabaseHas('ot_duties', [
-            'section' => 'Recovery section',
+            'section' => 'Recovery',
             'technician_name' => null,
             'ot_no' => null,
             'department' => null,
@@ -96,11 +119,11 @@ class OtDutyFormTest extends TestCase
         $admin = User::factory()->create(['role' => 'admin']);
 
         $this->actingAs($admin)
-            ->post('/ot-duty', $this->assignment('LR section'))
+            ->post('/ot-duty', $this->assignment('LR OT'))
             ->assertRedirect(route('ot-duty.index'));
 
         $this->assertDatabaseHas('ot_duties', [
-            'section' => 'LR section',
+            'section' => 'LR OT',
             'ot_no' => null,
             'department' => 'OBGY',
             'unit_no' => 1,
@@ -114,20 +137,27 @@ class OtDutyFormTest extends TestCase
 
         $this->actingAs($admin)
             ->from('/ot-duty/create')
-            ->post('/ot-duty', array_merge($this->assignment('2nd floor section'), ['ot_no' => 17]))
+            ->post('/ot-duty', array_merge($this->assignment('2nd floor'), ['ot_no' => 17]))
             ->assertSessionHasErrors('ot_no');
     }
 
-    public function test_afternoon_is_an_allowed_shift(): void
+    public function test_night_on_call_does_not_require_ot_number_or_unit(): void
     {
         /** @var User $admin */
         $admin = User::factory()->create(['role' => 'admin']);
 
         $this->actingAs($admin)
-            ->post('/ot-duty', array_merge($this->assignment('2nd floor section'), ['shift' => 'Afternoon']))
+            ->post('/ot-duty', array_merge($this->assignment('Night On Call'), [
+                'ot_no' => '',
+                'unit_no' => '',
+            ]))
             ->assertRedirect(route('ot-duty.index'));
 
-        $this->assertDatabaseHas('ot_duties', ['shift' => 'Afternoon']);
+        $this->assertDatabaseHas('ot_duties', [
+            'section' => 'Night On Call',
+            'ot_no' => null,
+            'unit_no' => null,
+        ]);
     }
 
     public function test_fourth_floor_accepts_only_ot_numbers_17_through_21_and_omits_unit(): void
@@ -136,18 +166,18 @@ class OtDutyFormTest extends TestCase
         $admin = User::factory()->create(['role' => 'admin']);
 
         $this->actingAs($admin)
-            ->post('/ot-duty', array_merge($this->assignment('4th floor section'), ['ot_no' => 17]))
+            ->post('/ot-duty', array_merge($this->assignment('4th floor'), ['ot_no' => 17]))
             ->assertRedirect(route('ot-duty.index'));
 
         $this->assertDatabaseHas('ot_duties', [
-            'section' => '4th floor section',
+            'section' => '4th floor',
             'ot_no' => 17,
             'unit_no' => null,
         ]);
 
         $this->actingAs($admin)
             ->from('/ot-duty/create')
-            ->post('/ot-duty', array_merge($this->assignment('4th floor section'), ['ot_no' => 1]))
+            ->post('/ot-duty', array_merge($this->assignment('4th floor'), ['ot_no' => 1]))
             ->assertSessionHasErrors('ot_no');
     }
 
@@ -156,7 +186,7 @@ class OtDutyFormTest extends TestCase
         return [
             'section' => $section,
             'sister_name' => 'Abdul',
-            'technician_name' => 'Anuja',
+            'technician_name' => 'Amrapali',
             'date_time' => '2026-09-27T10:00',
             'ot_no' => 1,
             'shift' => 'Morning',

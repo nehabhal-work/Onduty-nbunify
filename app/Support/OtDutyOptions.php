@@ -7,21 +7,21 @@ class OtDutyOptions
     public static function sections(): array
     {
         return [
-            '2nd floor section',
-            '4th floor section',
-            'LR section',
-            'Recovery section',
-            'Scope OT section',
+            '2nd floor',
+            '4th floor',
+            'LR OT',
+            'Recovery',
+            'Scope OT',
+            'Night On Call',
         ];
     }
 
     public static function sisters(): array
     {
-        $sisters = [
-            'Mrunali',
+        $sisters = array_unique([
+            '-',
+            'Mrunal',
             'Pallavi',
-            'Sara',
-            'Prathamesh',
             'Dipali N',
             'Sai',
             'Ashfaq',
@@ -39,7 +39,6 @@ class OtDutyOptions
             'Sonali T',
             'Aurang',
             'Nirmala',
-            'Anuja',
             'Avinash',
             'Surjeet',
             'Prasad',
@@ -47,7 +46,18 @@ class OtDutyOptions
             'Rahel',
             'Kailash',
             'Aarya',
-        ];
+            'Sachin',
+            'Shubham',
+            'Purva',
+            'Jai',
+            'Ruchita',
+            'Rupali',
+            'Kirti',
+            'Roshani',
+            'Madhukar',
+            'Renuka',
+            'Amrapali',
+        ]);
 
         sort($sisters, SORT_STRING | SORT_FLAG_CASE);
 
@@ -62,6 +72,7 @@ class OtDutyOptions
     public static function otNumbers(): array
     {
         return [
+            0,
             1,
             2,
             3,
@@ -85,7 +96,6 @@ class OtDutyOptions
     {
         return [
             'Morning',
-            'Afternoon',
             'Evening',
             'Night',
             'Double Duty',
@@ -94,7 +104,7 @@ class OtDutyOptions
 
     public static function departments(): array
     {
-        return [
+        $departments = [
             'OBGY',
             'ENT',
             'Ortho',
@@ -102,13 +112,20 @@ class OtDutyOptions
             'Euro',
             'Followup OT',
             'Surgery',
-            'Obthormology',
+            'Ophthalmic',
             'D-Wing',
+            'Oncology',
+            'Pseudodental',
+            '-',
         ];
+
+        sort($departments, SORT_STRING | SORT_FLAG_CASE);
+
+        return $departments;
     }
 
     public static function units(): array
     {
-        return [1, 2, 3, 4, 5, 6];
+        return [0, 1, 2, 3, 4, 5, 6];
     }
 }

@@ -76,7 +76,7 @@ class StaffDirectoryTest extends TestCase
 
         $this->actingAs($admin)
             ->post('/ot-duty', [
-                'section' => '2nd floor section',
+                'section' => '2nd floor',
                 'sister_name' => 'Test Sister',
                 'technician_name' => 'Test Technician',
                 'date_time' => '2026-10-02T10:00',
@@ -97,7 +97,7 @@ class StaffDirectoryTest extends TestCase
     {
         $member = StaffMember::query()->where('type', 'sister')->where('name', 'Mery')->firstOrFail();
         OtDuty::create([
-            'section' => '2nd floor section',
+            'section' => '2nd floor',
             'sister_name' => 'Mery',
             'technician_name' => 'Mery',
             'date_time' => now(),

@@ -56,9 +56,20 @@ class AuthRolesTest extends TestCase
             ->assertDontSee('@vite', false);
 
         $this->actingAs($admin)->get('/ot-duty/create')->assertOk();
+        $this->actingAs($admin)
+            ->get('/ot-duty')
+            ->assertSee('Add Sister')
+            ->assertSee('Add Technician')
+            ->assertSee('Add Assignment')
+            ->assertDontSee('New Assignment');
 
         $this->actingAs($manager)->get('/ot-duty/create')->assertForbidden();
-        $this->actingAs($manager)->get('/ot-duty')->assertOk();
+        $this->actingAs($manager)
+            ->get('/ot-duty')
+            ->assertOk()
+            ->assertDontSee('Add Sister')
+            ->assertDontSee('Add Technician')
+            ->assertDontSee('Add Assignment');
     }
 
     public function test_dashboard_requires_login_and_is_available_to_staff(): void

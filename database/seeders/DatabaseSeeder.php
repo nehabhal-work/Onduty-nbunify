@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\StaffMember;
 use App\Models\User;
+use App\Support\OtDutyOptions;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -39,5 +41,11 @@ class DatabaseSeeder extends Seeder
                 'role' => 'superadmin',
             ]
         );
+
+        foreach (StaffMember::TYPES as $type) {
+            foreach (OtDutyOptions::sisters() as $name) {
+                StaffMember::firstOrCreate(['type' => $type, 'name' => $name]);
+            }
+        }
     }
 }

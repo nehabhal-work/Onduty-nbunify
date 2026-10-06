@@ -37,11 +37,12 @@ document.querySelectorAll('#duty-section').forEach((sectionSelect) => {
 	const otSelect = form.querySelector('[name="ot_no"]');
 	const departmentSelect = form.querySelector('[name="department"]');
 	const sectionRules = {
-		'2nd floor section': { technician_name: true, ot_no: true, department: true, unit_no: true, surgery: true },
-		'4th floor section': { technician_name: true, ot_no: true, department: true, unit_no: false, surgery: true },
-		'LR section': { technician_name: true, ot_no: false, department: true, unit_no: true, surgery: true },
-		'Recovery section': { technician_name: false, ot_no: false, department: false, unit_no: false, surgery: false },
-		'Scope OT section': { technician_name: true, ot_no: false, department: true, unit_no: true, surgery: true },
+		'2nd floor': { technician_name: true, ot_no: true, department: true, unit_no: true, surgery: true },
+		'4th floor': { technician_name: true, ot_no: true, department: true, unit_no: false, surgery: true },
+		'LR OT': { technician_name: true, ot_no: false, department: true, unit_no: true, surgery: true },
+		Recovery: { technician_name: false, ot_no: false, department: false, unit_no: false, surgery: false },
+		'Scope OT': { technician_name: true, ot_no: false, department: true, unit_no: true, surgery: true },
+		'Night On Call': { technician_name: true, ot_no: false, department: true, unit_no: false, surgery: true },
 	};
 	const restrictedOtNumbers = new Set(['17', '18', '19', '20', '21']);
 
@@ -58,20 +59,20 @@ document.querySelectorAll('#duty-section').forEach((sectionSelect) => {
 		});
 
 		[...otSelect.options].forEach((option) => {
-			const isAllowed = section === '4th floor section'
+			const isAllowed = section === '4th floor'
 				? restrictedOtNumbers.has(option.value)
-				: section !== '2nd floor section' || !restrictedOtNumbers.has(option.value);
+				: section !== '2nd floor' || !restrictedOtNumbers.has(option.value);
 			option.hidden = !isAllowed;
 			option.disabled = !isAllowed;
 		});
 		if (otSelect.selectedOptions[0]?.disabled) otSelect.value = '';
 
 		[...departmentSelect.options].forEach((option) => {
-			const isAllowed = section !== 'LR section' || option.value === '' || option.value === 'OBGY';
+			const isAllowed = section !== 'LR OT' || option.value === '' || option.value === 'OBGY';
 			option.hidden = !isAllowed;
 			option.disabled = !isAllowed;
 		});
-		if (section === 'LR section') departmentSelect.value = 'OBGY';
+		if (section === 'LR OT') departmentSelect.value = 'OBGY';
 
 	};
 
