@@ -48,8 +48,8 @@
                     </form>
 
                     <div class="mt-4 small text-muted">
-                        <div><strong>Admin:</strong> admin@example.com / password</div>
-                        <div><strong>Manager:</strong> manager@example.com / password</div>
+                        <div><strong>Admin:</strong> admin@dy.com / password</div>
+                        <div><strong>Manager:</strong> manager@dy.com / password</div>
                     </div>
                 </div>
             </div>
