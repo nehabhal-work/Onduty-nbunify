@@ -18,7 +18,8 @@ body.app-body {
     flex-direction: column;
     padding: 1.5rem 1rem 1rem;
     color: var(--bs-light);
-    background-color: var(--bs-dark);
+    /* Bootstrap's .offcanvas-lg forces a transparent background on desktop. */
+    background-color: var(--bs-dark) !important;
 }
 
 .sidebar-brand {
