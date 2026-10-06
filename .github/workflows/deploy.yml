@@ -21,8 +21,7 @@ jobs:
           script: |
             set -e
 
-            # Project folder on the server - change this to your real path.
-            cd /var/www/on-duty
+            cd ~/domains/dypatil.nbunify.com/public_html
 
             COMPOSER_BIN="/usr/local/bin/composer"
 
