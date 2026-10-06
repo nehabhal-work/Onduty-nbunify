@@ -29,7 +29,7 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h4 class="mb-1">OT Duty Assignment</h4>
+                <h4 class="mb-1">OT Duty Assignmentss</h4>
                 <p class="text-muted mb-0">
                     Manage Sister and Technician OT assignments.
                 </p>
