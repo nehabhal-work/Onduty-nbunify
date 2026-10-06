@@ -55,9 +55,6 @@ body.app-body {
     display: block;
     width: 100%;
     height: auto;
-    padding: .5rem .625rem;
-    background-color: var(--bs-white);
-    border-radius: var(--bs-border-radius);
 }
 
 .brand-logo-wrap .brand-caption {
